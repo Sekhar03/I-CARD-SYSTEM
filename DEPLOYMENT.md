@@ -34,7 +34,7 @@ Before deploying, ensure you have the following:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Sekhar03/icard-system.git
+   git clone https://github.com/Sekhar03/I-CARD-SYSTEM.git
    cd icard-system
    ```
 
@@ -100,7 +100,7 @@ npm run lint
 
 1. **Clone and navigate to the project**
    ```bash
-   git clone https://github.com/Sekhar03/icard-system.git
+   git clone https://github.com/Sekhar03/I-CARD-SYSTEM.git
    cd icard-system
    ```
 

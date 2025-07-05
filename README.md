@@ -59,7 +59,7 @@ Before running this application, make sure you have the following installed:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/Sekhar03/icard-system.git
+git clone https://github.com/Sekhar03/I-CARD-SYSTEM.git
 cd icard-system
 ```
 

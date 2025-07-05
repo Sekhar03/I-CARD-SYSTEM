@@ -41,7 +41,7 @@ This document summarizes all the files and configurations created for the GitHub
 git init
 git add .
 git commit -m "Initial commit: East Coast Railway I-Card System"
-git remote add origin https://github.com/Sekhar03/icard-system.git
+git remote add origin https://github.com/Sekhar03/I-CARD-SYSTEM.git
 git push -u origin main
 ```
 
