@@ -101,7 +101,7 @@ create_github_repo() {
         echo "5. Don't initialize with README (we already have one)"
         echo ""
         echo "Then run:"
-        echo "git remote add origin https://github.com/YOUR_USERNAME/$repo_name.git"
+        echo "git remote add origin https://github.com/Sekhar03/$repo_name.git"
         echo "git branch -M main"
         echo "git push -u origin main"
     fi
@@ -190,7 +190,7 @@ create_release() {
 
 ### Installation
 \`\`\`bash
-git clone https://github.com/YOUR_USERNAME/icard-system.git
+git clone https://github.com/Sekhar03/icard-system.git
 cd icard-system
 npm install
 cp env.example .env
@@ -223,7 +223,7 @@ main() {
     create_release "$version"
     
     print_success "GitHub repository setup completed!"
-    print_status "Your repository is now available at: https://github.com/YOUR_USERNAME/$repo_name"
+    print_status "Your repository is now available at: https://github.com/Sekhar03/$repo_name"
     print_status "Next steps:"
     echo "1. Update the repository URL in README.md"
     echo "2. Configure GitHub Actions secrets"
