@@ -303,12 +303,7 @@ This project is licensed under the ISC License.
 - Open source community for the libraries used
 - Contributors and maintainers
 
-## 📞 Support
 
-For support and queries:
-- Email: itcentre@ecor.gov.in
-- Phone: +91-XXX-XXXXXXX
-- Address: IT Centre, East Coast Railway, Bhubaneswar
 
 ## 🔄 Version History
 
