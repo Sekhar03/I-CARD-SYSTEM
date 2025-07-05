@@ -1,0 +1,121 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icard-system
+  labels:
+    app: icard-system
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: icard-system
+  template:
+    metadata:
+      labels:
+        app: icard-system
+    spec:
+      containers:
+      - name: icard-system
+        image: your-dockerhub-username/icard-system:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PORT
+          value: "3000"
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: uri
+        - name: ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: admin-secret
+              key: username
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: admin-secret
+              key: password
+        - name: SESSION_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: session-secret
+              key: secret
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/status/health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/status/health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: uploads-volume
+          mountPath: /app/public/uploads
+      volumes:
+      - name: uploads-volume
+        persistentVolumeClaim:
+          claimName: uploads-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: icard-system-service
+spec:
+  selector:
+    app: icard-system
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: uploads-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongodb-secret
+type: Opaque
+data:
+  uri: bW9uZ29kYjovL21vbmdvZGI6MjcwMTcvaWNhcmRfZGI= # base64 encoded
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-secret
+type: Opaque
+data:
+  username: YWRtaW4= # base64 encoded
+  password: YWRtaW4xMjM= # base64 encoded
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: session-secret
+type: Opaque
+data:
+  secret: eW91ci1zdXBlci1zZWNyZXQta2V5LWhlcmU= # base64 encoded 
